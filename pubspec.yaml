@@ -1,6 +1,9 @@
-name: offline_sync
+name: flutter_offline_sync
+homepage: https://github.com/deeps00007/offline_sync
+repository: https://github.com/deeps00007/offline_sync
+
 description: "A new Flutter package project."
-version: 0.0.1
+version: 1.0.0
 
 environment:
   sdk: ^3.9.2

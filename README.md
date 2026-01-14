@@ -1,2 +1,2 @@
-# offline_sync
+# flutter_offline_sync
 
