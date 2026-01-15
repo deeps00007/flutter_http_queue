@@ -1,25 +1,21 @@
 MIT License
-© 2026 Deepanshu Singh
 
----
+Copyright (c) 2026 Deepanshu Singh
 
-## ✅ What this README does RIGHT
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-- Explains value in **seconds**
-- Clear examples
-- Honest limitations
-- Shows roadmap (maintainer signal)
-- Passes pub.dev quality checks
-- Looks professional on GitHub & pub.dev
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
----
-
-## 🔥 Next recommended steps
-
-Pick **one** and I’ll help:
-
-1️⃣ Polish the **example app UI**  
-2️⃣ Add **badges** (pub.dev, Flutter)  
-3️⃣ Improve **pub.dev score & SEO**  
-4️⃣ Plan **v1.1 features**  
-5️⃣ Prepare a **LinkedIn post** announcing the package 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

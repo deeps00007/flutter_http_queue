@@ -1,199 +1,150 @@
 # sync_offline_requests
 
-Offline-first HTTP request handling for Flutter applications.
+[![Pub Version](https://img.shields.io/pub/v/sync_offline_requests.svg)](https://pub.dev/packages/sync_offline_requests)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Flutter Platform](https://img.shields.io/badge/Platform-Flutter-02569B?logo=flutter)](https://flutter.dev)
 
-`sync_offline_requests` automatically queues failed API requests when the device is offline and syncs them safely when internet connectivity is restored. It is designed to make your apps reliable in real-world network conditions.
+**Offline-first HTTP request handling for Flutter applications.**
+
+`sync_offline_requests` ensures your app remains functional even in unreliable network conditions. It automatically queues failed API requests when the device is offline and synchronizes them effectively once internet connectivity is restored, using a persistent SQLite-backed queue.
 
 ---
 
 ## ✨ Features
 
-- 📡 Offline-first HTTP requests
-- 🧾 Persistent request queue using SQLite
-- 🔁 Automatic retry with configurable retry limits
-- 🌐 Auto-sync when internet connectivity is restored
-- ⏳ FIFO (First-In-First-Out) request processing
-- 🧠 Simple and minimal public API
-- 🧪 Example application included
+- **📡 Offline-First Architecture**: Seamlessly handle HTTP requests regardless of network status.
+- **🧾 Persistent Queue**: Requests are safely stored in a local SQLite database, surviving app restarts.
+- **🔁 Intelligent Retry**: Configurable retry mechanisms with maximum retry limits for failed sync attempts.
+- **🌐 Auto-Synchronization**: Automatically detects network restoration and processes the queue.
+- **⏳ FIFO Processing**: Maintains the order of operations with First-In-First-Out processing.
+- **🧠 Minimal API**: Simple to integrate with existing projects.
 
 ---
 
 ## 📦 Installation
 
-Add this to your `pubspec.yaml`:
+Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   sync_offline_requests: ^1.0.0
+```
 
+Run the fetch command:
 
-Then run:
-
+```bash
 flutter pub get
+```
 
-🚀 Quick Start
-1️⃣ Initialize once at app startup
+---
+
+## 🚀 Quick Start
+
+### 1. Initialize
+
+Initialize the package in your `main()` function. This sets up the database and network listeners.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:sync_offline_requests/sync_offline_requests.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize the offline sync engine
   OfflineSync.initialize();
+  
   runApp(const MyApp());
 }
+```
 
+### 2. Send Requests
 
-⚠️ Initialization is safe to call multiple times.
+Use `OfflineSync` to send your HTTP requests. The package handles the rest.
 
-------------------------------------------------------------------------
+```dart
+try {
+  await OfflineSync.post(
+    url: 'https://example.com/api/data',
+    body: {
+      'name': 'John Doe',
+      'role': 'Developer',
+    },
+  );
+  print('Request processed (either sent or queued)');
+} catch (e) {
+  print('Error processing request: $e');
+}
+```
 
-2️⃣ Send a request (offline-safe)
-await OfflineSync.post(
-  url: 'https://example.com/api/data',
-  body: {
-    'name': 'John',
-    'age': 25,
-  },
-);
-That’s it.
+**Behavior:**
+- **Online**: The request is sent immediately.
+- **Offline**: The request is saved to the local database and queued for later synchronization.
 
-If the internet is available → request is sent immediately
+---
 
-If offline → request is stored locally and synced later
+## 🧠 Core Concepts
 
-------------------------------------------------------------------------
+1.  **Storage**: All requests are initially passed to the `OfflineSync` handler.
+2.  **Queue**: If offline, the request is stored in SQLite.
+3.  **Monitoring**: The package listens for connectivity changes (Wi-Fi, Mobile Data).
+4.  **Sync**: When a connection is re-established, the queue is processed.
+5.  **Retry Logic**: Failed sync attempts are retried up to a configurable limit before being discarded to prevent infinite loops.
 
-🧠 How It Works
+---
 
-Requests are always saved locally in SQLite
+## � Advanced Usage
 
-If the device is offline, requests remain queued
+### Manual Sync
 
-Connectivity changes are monitored automatically
+You can Force a sync operation manually, for example, on a "Pull to Refresh" action.
 
-When internet is restored, queued requests are synced
-
-Successful requests are removed from local storage
-
-Failed requests are retried up to a maximum retry limit
-
-This ensures no data loss, even if the app crashes or restarts.
-
-
-------------------------------------------------------------------------
-
-🔄 Manual Sync (Optional)
-
-You can manually trigger syncing at any time:
-
+```dart
 await OfflineSync.syncNow();
+```
 
+### Check Pending Requests
 
-Useful for:
+Get the current count of requests waiting in the queue.
 
-Pull-to-refresh
-
-Retry buttons
-
-App resume events
-
-
-------------------------------------------------------------------------
-
-📊 Pending Requests Count
-
-Get the number of queued requests:
-
-final count = await OfflineSync.pendingCount();
-
-
-Useful for debugging or showing sync status in UI.
-
-------------------------------------------------------------------------
-
-⚠️ Limitations
-
-Supports POST, PUT, and DELETE methods (v1)
-
-Designed for JSON-based APIs
-
-Not intended for large file uploads
-
-Background sync is not supported yet
-
-------------------------------------------------------------------------
-
-🛣️ Roadmap
-
-Planned future improvements:
-
-GET request support
-
-Custom headers support
-
-Background / foreground sync handling
-
-Conflict resolution strategies
-
-Optional encryption for stored requests
-
-------------------------------------------------------------------------
-
-📁 Example App
-
-An example Flutter app is included in the example/ folder demonstrating:
-
-Offline request storage
-
-Auto-sync on connectivity restore
-
-Pending request count updates
-
-------------------------------------------------------------------------
-
-🧩 Use Cases
-
-Forms submission in poor network conditions
-
-Chat messages or events queuing
-
-Analytics or logs syncing
-
-Reliable API calls for field-based apps
-
-------------------------------------------------------------------------
-
-🤝 Contributing
-
-Contributions, issues, and feature requests are welcome.
-Please open an issue or submit a pull request on GitHub.
-
-------------------------------------------------------------------------
-
-📄 License
-
-MIT License
-© 2026 Deepanshu Singh
-
+```dart
+final int pendingCount = await OfflineSync.pendingCount();
+print('Pending requests: $pendingCount');
+```
 
 ---
 
-## ✅ What this README does RIGHT
+## ⚠️ Limitations
 
-- Explains value in **seconds**
-- Clear examples
-- Honest limitations
-- Shows roadmap (maintainer signal)
-- Passes pub.dev quality checks
-- Looks professional on GitHub & pub.dev
+- Currently supports **POST**, **PUT**, and **DELETE** methods.
+- Designed primarily for **JSON** payloads.
+- Not optimized for large multi-part file uploads.
+- Background sync (when the app is closed) is platform-dependent and currently relies on the app being in the foreground or suspended state.
 
 ---
 
-## 🔥 Next recommended steps
+## �️ Roadmap
 
-Pick **one** and I’ll help:
+- [ ] GET request caching support
+- [ ] Custom headers configuration
+- [ ] Enhanced background sync work manager
+- [ ] Conflict resolution strategies
+- [ ] Payload encryption
 
-1️⃣ Polish the **example app UI**  
-2️⃣ Add **badges** (pub.dev, Flutter)  
-3️⃣ Improve **pub.dev score & SEO**  
-4️⃣ Plan **v1.1 features**  
-5️⃣ Prepare a **LinkedIn post** announcing the package  
+---
 
-You did real engineering work — now let’s make it visible 🚀
+## 🤝 Contributing
 
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
+## � License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
