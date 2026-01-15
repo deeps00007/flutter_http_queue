@@ -28,7 +28,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  sync_offline_requests: ^1.0.4
+  sync_offline_requests: ^1.1.0
 ```
 
 Run the fetch command:

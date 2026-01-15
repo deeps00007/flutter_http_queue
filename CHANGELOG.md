@@ -1,3 +1,7 @@
+## 1.1.0
+- Bumped version to stable 1.1.0
+- Stabilized API and improved documentation
+
 ## 1.0.5
 - Improved documentation with failed request cleanup features
 - Added usage examples for clearing failed requests
