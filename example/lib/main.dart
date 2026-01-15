@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_http_queue/flutter_http_queue.dart';
+import 'package:sync_offline_requests/sync_offline_requests.dart';
 
 import 'dart:async';
 
