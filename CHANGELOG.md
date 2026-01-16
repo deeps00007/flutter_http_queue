@@ -1,3 +1,7 @@
+## 1.1.1
+- Removed decorative icons from documentation for cleaner look
+- Minor documentation updates
+
 ## 1.1.0
 - Bumped version to stable 1.1.0
 - Stabilized API and improved documentation
