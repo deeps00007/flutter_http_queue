@@ -10,19 +10,19 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- **📡 Offline-First Architecture**: Seamlessly handle HTTP requests regardless of network status.
-- **🧾 Persistent Queue**: Requests are safely stored in a local SQLite database, surviving app restarts.
-- 🧹 Automatic cleanup of failed requests after retry limit is exceeded
-- **🔁 Intelligent Retry**: Configurable retry mechanisms with maximum retry limits for failed sync attempts.
-- **🌐 Auto-Synchronization**: Automatically detects network restoration and processes the queue.
-- **⏳ FIFO Processing**: Maintains the order of operations with First-In-First-Out processing.
-- **🧠 Minimal API**: Simple to integrate with existing projects.
+- **Offline-First Architecture**: Seamlessly handle HTTP requests regardless of network status.
+- **Persistent Queue**: Requests are safely stored in a local SQLite database, surviving app restarts.
+- **Automatic cleanup** of failed requests after retry limit is exceeded
+- **Intelligent Retry**: Configurable retry mechanisms with maximum retry limits for failed sync attempts.
+- **Auto-Synchronization**: Automatically detects network restoration and processes the queue.
+- **FIFO Processing**: Maintains the order of operations with First-In-First-Out processing.
+- **Minimal API**: Simple to integrate with existing projects.
 
 ---
 
-## 📦 Installation
+## Installation
 
 Add the dependency to your `pubspec.yaml`:
 
@@ -39,7 +39,7 @@ flutter pub get
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Initialize
 
@@ -83,7 +83,7 @@ try {
 
 ---
 
-## 🧠 Core Concepts
+## Core Concepts
 
 1.  **Storage**: All requests are initially passed to the `OfflineSync` handler.
 2.  **Queue**: If offline, the request is stored in SQLite.
@@ -102,7 +102,7 @@ try {
 
 ---
 
-## 🔧 Advanced Usage
+## Advanced Usage
 
 ### Manual Sync
 
@@ -121,7 +121,7 @@ final int pendingCount = await OfflineSync.pendingCount();
 print('Pending requests: $pendingCount');
 ```
 
-## 🧹 Failed Request Cleanup
+## Failed Request Cleanup
 
 To prevent infinite retries and database growth, requests that exceed the
 maximum retry limit are considered **failed**.
@@ -135,10 +135,9 @@ print('Removed $removedCount failed requests');
 
 This helps keep local storage clean and avoids unnecessary sync attempts.
 
-
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 - Currently supports **POST**, **PUT**, and **DELETE** methods.
 - Designed primarily for **JSON** payloads.
@@ -147,7 +146,7 @@ This helps keep local storage clean and avoids unnecessary sync attempts.
 
 ---
 
-## 🛣️ Roadmap
+## Roadmap
 
 - [ ] GET request caching support
 - [ ] Custom headers configuration
@@ -157,7 +156,7 @@ This helps keep local storage clean and avoids unnecessary sync attempts.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -169,6 +168,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
