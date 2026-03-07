@@ -1,3 +1,7 @@
+## 1.2.1
+- Updated example app to demonstrate PUT, DELETE, and custom headers
+- Updated README Quick Start section with all new API methods
+
 ## 1.2.0
 
 ### New Features
